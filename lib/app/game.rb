@@ -27,7 +27,9 @@ class Game
     @players.each do |player|
       puts "#{player.emoji} #{player.name} has the #{player.token} token!".blue
     end
+    puts ""
     print @finger_right + "Press Enter to begin ! <".green + @finger_left
+    puts ""
     gets.chomp
   end
   #Retourne le joueur étant first player
@@ -49,10 +51,13 @@ class Game
   # choisit un des 2 joueurs au hasard pour commencer la partie
   def select_random_first_player
     puts "Random choice of the first player...".red
+    puts ""
     first_player = @players[rand(0..1)]
     first_player.is_current_player = true
     first_player.is_first_player = true
     puts "#{find_first_player.emoji} #{find_first_player.name} will play first!".blue
+    puts ""
+    puts ""
   end
   #Définit le first player désigné dans une autre fonction comme current player
   def set_first_player_as_current_player
@@ -74,10 +79,10 @@ class Game
     p p_choice
     while (p_choice < 1 || p_choice > 9 ) || @board.cells[p_choice-1].state != " "
       if (p_choice < 1 || p_choice > 9 )
-        puts "\u{1f928} mmmhh you're not that smart isn't it? You need to enter a digit between 1 and 9..."
+        puts "\u{1f928} mmmhh you're not that smart isn't it? You need to enter a digit between 1 and 9...".reverse_color
         print @finger_right
       elsif @board.cells[p_choice-1].state != " "
-        puts "\u{1f644} You can't choose this one as it's already marked, you dumb..."
+        puts "\u{1f644} You can't choose this one as it's already marked, you dumb...".reverse_color
         print @finger_right
       end
       p_choice = gets.chomp.to_i
@@ -99,14 +104,16 @@ class Game
   end
   # Annonce que la manche est terminée par une égalité puis propose de rejouer. Renvoie le choix y ou n
   def announce_round_is_draw
-    puts " \u{1f610} This round is a draw".blue
+    puts "     \u{1f610} This round is a draw".blue
+    puts ""
+    puts ""
     show_score
     puts ""
     puts "Do you want to play again? (y/n)".magenta
     print @finger_right
     choice = gets.chomp
     while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
-      puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
+      puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)".reverse_color
       print @finger_right
       choice = gets.chomp
     end
@@ -117,13 +124,14 @@ class Game
     puts "#{winner_player.emoji} #{winner_player.name} has won this round !".blue
     update_score(winner_player)
     puts ""
+    puts ""
     show_score
     puts ""
     puts "Do you want to play again? (y \u{1f44d} OR n \u{1f44e})".magenta
     print @finger_right
     choice = gets.chomp
     while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
-      puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
+      puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)".reverse_color
       print @finger_right
       choice = gets.chomp
     end
