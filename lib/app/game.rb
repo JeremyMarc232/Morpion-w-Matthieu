@@ -101,10 +101,10 @@ class Game
     puts ""
     puts "Do you want to play again? (y/n)".magenta
     choice = gets.chomp
-    if choice != "y" && choice != "n"
+    while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
       puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
       print "> "
-      announce_round_is_draw
+      choice = gets.chomp
     end
     choice
   end
@@ -117,10 +117,10 @@ class Game
     puts ""
     puts "Do you want to play again? (y \u{1f44d} OR n \u{1f44e})".magenta
     choice = gets.chomp
-    if choice != "y" && choice != "n" && choice != "Y" && choice != "N"
+    while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
       puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
       print "> "
-      annouce_round_winner(winner_player)
+      choice = gets.chomp
     end
     choice
   end
@@ -155,13 +155,13 @@ class Game
   def perform
     new_round
     game_cycle
-    if @board.is_board_full?
-      render_grid
-      wanna_play_again?(announce_round_is_draw)
-    else
+    if return_winner_player(@board.check_victory_cases) != nil
       render_grid
       winner = return_winner_player(@board.check_victory_cases)
       wanna_play_again?(annouce_round_winner(winner))
+    else
+      render_grid
+      wanna_play_again?(announce_round_is_draw)
     end
   end
 end
