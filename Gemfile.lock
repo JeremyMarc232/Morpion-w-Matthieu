@@ -20,6 +20,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   rspec
 
 RUBY VERSION

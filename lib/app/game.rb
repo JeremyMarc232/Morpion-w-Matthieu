@@ -69,14 +69,14 @@ class Game
     print "> "
     p_choice = gets.chomp.to_i
     p p_choice
-    while (p_choice < 1 || p_choice > 9 )
-      puts "\u{1f928} mmmhh you're not that smart isn't it? You need to enter a digit between 1 and 9..."
-      print "> "
-      p_choice = gets.chomp.to_i
-    end
-    while @board.cells[p_choice-1].state != " "
-      puts "\u{1f644} You can't choose this one as it's already marked, you dumb..."
-      print "> "
+    while (p_choice < 1 || p_choice > 9 ) || @board.cells[p_choice-1].state != " "
+      if (p_choice < 1 || p_choice > 9 )
+        puts "\u{1f928} mmmhh you're not that smart isn't it? You need to enter a digit between 1 and 9..."
+        print "> "
+      elsif @board.cells[p_choice-1].state != " "
+        puts "\u{1f644} You can't choose this one as it's already marked, you dumb..."
+        print "> "
+      end
       p_choice = gets.chomp.to_i
     end
     return p_choice
