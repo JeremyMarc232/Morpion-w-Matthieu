@@ -1,13 +1,16 @@
 class Game
-  attr_accessor :players, :board
+  attr_accessor :players, :board, :finger_right, :finger_left
   def initialize (array_of_names)
     cross_mark = "\u2718".brown
     circle_mark = "\u274D".cyan
+    @finger_right = "\u{1f449}  "
+    @finger_left = "  \u{1f448}"
     @players = [Player.new(array_of_names[0], cross_mark, "\u{1f466}"	), Player.new(array_of_names[1], circle_mark, "\u{1f469}")]
     welcome_players
     new_round
     select_random_first_player
     perform
+    
   end
   # Affiche la représentation graphique de la board
   def render_grid
@@ -24,7 +27,7 @@ class Game
     @players.each do |player|
       puts "#{player.emoji} #{player.name} has the #{player.token} token!".blue
     end
-    print "> Press Enter to begin ! <".green
+    print @finger_right + "Press Enter to begin ! <".green + @finger_left
     gets.chomp
   end
   #Retourne le joueur étant first player
@@ -65,17 +68,17 @@ class Game
   def player_choice
     puts "      #{find_current_player.emoji} #{find_current_player.name}'s turn !'".blue
     puts ""
-    puts "What cell do you choose? (1-9)".magenta
-    print "> "
+    puts " What cell do you choose? (1-9)".magenta
+    print @finger_right
     p_choice = gets.chomp.to_i
     p p_choice
     while (p_choice < 1 || p_choice > 9 ) || @board.cells[p_choice-1].state != " "
       if (p_choice < 1 || p_choice > 9 )
         puts "\u{1f928} mmmhh you're not that smart isn't it? You need to enter a digit between 1 and 9..."
-        print "> "
+        print @finger_right
       elsif @board.cells[p_choice-1].state != " "
         puts "\u{1f644} You can't choose this one as it's already marked, you dumb..."
-        print "> "
+        print @finger_right
       end
       p_choice = gets.chomp.to_i
     end
@@ -100,10 +103,11 @@ class Game
     show_score
     puts ""
     puts "Do you want to play again? (y/n)".magenta
+    print @finger_right
     choice = gets.chomp
     while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
       puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
-      print "> "
+      print @finger_right
       choice = gets.chomp
     end
     choice
@@ -116,10 +120,11 @@ class Game
     show_score
     puts ""
     puts "Do you want to play again? (y \u{1f44d} OR n \u{1f44e})".magenta
+    print @finger_right
     choice = gets.chomp
     while choice != "y" && choice != "n" && choice != "Y" && choice != "N"
       puts "\u{1f611} Come'on dont be stupid, you just have to choose yes or no (type y or n then ENTER you dumb!)"
-      print "> "
+      print @finger_right
       choice = gets.chomp
     end
     choice
