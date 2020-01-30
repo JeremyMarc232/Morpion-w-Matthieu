@@ -140,11 +140,11 @@ class Game
 
   def wanna_play_again?(choice)
     case choice
-    when "y"
+    when "y" || "Y"
       switch_first_player
       set_first_player_as_current_player
       perform
-    when "n"
+    when "n" || "N"
       puts "\u{1f44b}	Bye bye guys !!".green
       exit(true)
     else
